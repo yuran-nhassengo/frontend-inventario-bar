@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {EntradaForm} from '../entrada';
 import {SaidaForm} from '../saida';
 import {RelatorioView }from '../relatorio';
+import { Header } from '../header';
 
 export const EstoqueView = () => {
   const [produtos, setProdutos] = useState([]);
@@ -18,6 +19,7 @@ export const EstoqueView = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
+      <Header/>
       <div className="mb-4 flex space-x-4">
         <button
           onClick={() => setView('entrada')}
