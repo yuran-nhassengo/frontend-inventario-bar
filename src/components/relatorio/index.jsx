@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 // Função para simular a geração de relatórios
-export const gerarRelatorioExemplo = () => {
+ const GerarRelatorioExemplo = () => {
   return [
     { id: 1, tipo: 'Entrada', descricao: 'Entrada de 50 unidades de Cerveja', data: '2024-08-29' },
     { id: 2, tipo: 'Saída', descricao: 'Saída de 10 unidades de Cerveja', data: '2024-08-29' },
   ];
 };
 
-const RelatorioView = () => {
+export const RelatorioView = () => {
   const [relatorios, setRelatorios] = useState([]);
 
   useEffect(() => {
