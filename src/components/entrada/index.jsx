@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 export const EntradaForm = () => {
@@ -13,7 +14,7 @@ export const EntradaForm = () => {
         produtoId,
         quantidade,
       });
-      alert('Produto adicionado com sucesso!');
+      alert('Entrada adicionado com sucesso!');
       
       // Limpar os campos do formulário após a submissão bem-sucedida
       setProdutoId('');
@@ -32,7 +33,7 @@ export const EntradaForm = () => {
             ID do Produto
           </label>
           <input
-            type="number"
+            type="String"
             id="produtoId"
             value={produtoId}
             onChange={(e) => setProdutoId(e.target.value)}
