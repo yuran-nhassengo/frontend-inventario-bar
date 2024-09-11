@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export const AdicionarProdutoForm = ({ closeModal, refreshStock }) => {
+export const AdicionarProdutoForm = () => {
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Bebidas'); // Definir um valor padrão
   const [quantidade, setQuantidade] = useState('');
@@ -12,15 +12,21 @@ export const AdicionarProdutoForm = ({ closeModal, refreshStock }) => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8000/api/stock/add-stock", {
+      await axios.post("http://localhost:8000/api/stock/create-stock", {
         nome,
         categoria,
         quantidade,
         precoCompra,
         precoVenda
       });
-      refreshStock(); // Atualiza a lista de produtos após adicionar
-      closeModal(); // Fecha o modal
+      alert('Produto adicionado com sucesso!');
+      
+      // Limpar os campos do formulário após a submissão bem-sucedida
+      setNome('');
+      setCategoria('Bebidas');
+      setQuantidade('');
+      setPrecoCompra('');
+      setPrecoVenda('');
     } catch (error) {
       console.error("Erro ao adicionar produto:", error);
     }
