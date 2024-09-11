@@ -3,18 +3,31 @@ import {EntradaForm} from '../entrada';
 import {SaidaForm} from '../saida';
 import {RelatorioView }from '../relatorio';
 import { Header } from '../header';
+import axios from 'axios';
 
 export const EstoqueView = () => {
   const [produtos, setProdutos] = useState([]);
-  const [view, setView] = useState('estoque'); // Controle do estado da visualização
+  const [view, setView] = useState('estoque');
+
+  const fecthStock = async () => {
+
+    try {
+
+      const response = await  axios.get("http://localhost:8000/api/stock/get-stock");
+
+      console.log("teste",response.data);
+
+      setProdutos(response.data);
+      
+    } catch (error) {
+
+      console.log(error);
+
+    }
+  };
 
   useEffect(() => {
-    // Lógica para buscar os dados dos produtos
-    // Por exemplo, chamada API para buscar os produtos
-    setProdutos([
-      { id: 1, nome: 'Cerveja', categoria: 'Bebida', quantidade: 100, preco: 5.00 },
-      { id: 2, nome: 'Whisky', categoria: 'Bebida', quantidade: 50, preco: 20.00 }
-    ]);
+    fecthStock();
   }, []);
 
   return (
@@ -55,7 +68,8 @@ export const EstoqueView = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoria</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço Compra</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço Venda</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -65,7 +79,8 @@ export const EstoqueView = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{produto.nome}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{produto.categoria}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{produto.quantidade}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{produto.preco.toFixed(2)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{produto.precoCompra.toFixed(2)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{produto.precoVenda.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
