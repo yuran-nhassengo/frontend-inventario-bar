@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 export const EntradaForm = () => {
   const [produtoId, setProdutoId] = useState('');
-  const [quantidade, setQuantidade] = useState('');
+  const [quantidade, setQuantidade] = useState(0);
   // const [data, setData] = useState('');
 
   const handleSubmit = async (e) => {
